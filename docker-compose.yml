@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: heartmatch-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_HOST: '%'
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./scripts/init_all_databases.sql:/docker-entrypoint-initdb.d/00-init.sql
+      - ./scripts/user-service.sql:/docker-entrypoint-initdb.d/01-user.sql
+      - ./scripts/content-service.sql:/docker-entrypoint-initdb.d/02-content.sql
+      - ./scripts/match-service.sql:/docker-entrypoint-initdb.d/03-match.sql
+      - ./scripts/im-service.sql:/docker-entrypoint-initdb.d/04-im.sql
+      - ./scripts/video-service.sql:/docker-entrypoint-initdb.d/05-video.sql
+      - ./scripts/live-service.sql:/docker-entrypoint-initdb.d/06-live.sql
+      - ./scripts/pay-service.sql:/docker-entrypoint-initdb.d/07-pay.sql
+    command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    container_name: heartmatch-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  mysql_data:
+  redis_data:

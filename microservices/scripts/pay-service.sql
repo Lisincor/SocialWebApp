@@ -1,0 +1,50 @@
+-- 支付服务数据库
+CREATE DATABASE IF NOT EXISTS heartmatch_pay DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE heartmatch_pay;
+
+-- VIP套餐表
+CREATE TABLE IF NOT EXISTS `vip_package` (
+    `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `name` VARCHAR(50) NOT NULL,
+    `level` TINYINT NOT NULL,
+    `price` DECIMAL(10,2) NOT NULL,
+    `duration_days` INT NOT NULL,
+    `description` VARCHAR(500) DEFAULT NULL,
+    `is_active` TINYINT DEFAULT 1,
+    `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- VIP订单表
+CREATE TABLE IF NOT EXISTS `vip_order` (
+    `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `order_no` VARCHAR(64) NOT NULL,
+    `user_id` BIGINT UNSIGNED NOT NULL,
+    `package_id` BIGINT UNSIGNED NOT NULL,
+    `amount` DECIMAL(10,2) NOT NULL,
+    `status` TINYINT DEFAULT 0 COMMENT '0待支付 1已支付 2已取消',
+    `paid_at` DATETIME DEFAULT NULL,
+    `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE KEY `uk_order_no` (`order_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- 钱包表
+CREATE TABLE IF NOT EXISTS `wallet` (
+    `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `user_id` BIGINT UNSIGNED NOT NULL,
+    `balance` DECIMAL(10,2) DEFAULT 0.00,
+    `diamond_balance` INT DEFAULT 0,
+    `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    UNIQUE KEY `uk_user` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- 充值记录表
+CREATE TABLE IF NOT EXISTS `recharge_record` (
+    `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `user_id` BIGINT UNSIGNED NOT NULL,
+    `amount` DECIMAL(10,2) NOT NULL,
+    `diamond_amount` INT NOT NULL,
+    `order_no` VARCHAR(64) NOT NULL,
+    `status` TINYINT DEFAULT 0,
+    `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE KEY `uk_order_no` (`order_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

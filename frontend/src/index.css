@@ -1,0 +1,252 @@
+@import "tailwindcss";
+
+/* Custom theme variables */
+@theme {
+  --color-primary-50: #FFF5F7;
+  --color-primary-100: #FFE4EB;
+  --color-primary-200: #FFC8D6;
+  --color-primary-300: #FF9EB8;
+  --color-primary-400: #FF6B8A;
+  --color-primary-500: #FF4B6E;
+  --color-primary-600: #E63A5D;
+  --color-primary-700: #CC2A4D;
+  --color-primary-800: #A32040;
+  --color-primary-900: #861A36;
+
+  --color-secondary-50: #FFFBF0;
+  --color-secondary-100: #FFF5D6;
+  --color-secondary-200: #FFE8AD;
+  --color-secondary-300: #FFD97A;
+  --color-secondary-400: #FFC654;
+  --color-secondary-500: #FFB84C;
+  --color-secondary-600: #E6A235;
+  --color-secondary-700: #CC8F20;
+  --color-secondary-800: #A37518;
+  --color-secondary-900: #865F14;
+
+  --color-accent-50: #F3F2FF;
+  --color-accent-100: #E8E5FF;
+  --color-accent-200: #D1CBFF;
+  --color-accent-300: #B8AFFF;
+  --color-accent-400: #9D8AFF;
+  --color-accent-500: #6C5CE7;
+  --color-accent-600: #5848D4;
+  --color-accent-700: #4638B8;
+  --color-accent-800: #3A2C98;
+  --color-accent-900: #31247E;
+
+  --color-dark-100: #262626;
+  --color-dark-200: #1A1A1A;
+  --color-dark-300: #141414;
+  --color-dark-400: #0D0D0D;
+
+  --radius-button: 20px;
+  --radius-card: 12px;
+  --radius-avatar: 9999px;
+
+  --animate-heartbeat: heartbeat 1s ease-in-out infinite;
+  --animate-slide-up: slideUp 0.3s ease-out;
+  --animate-slide-down: slideDown 0.3s ease-out;
+  --animate-fade-in: fadeIn 0.3s ease-out;
+  --animate-bounce-in: bounceIn 0.5s ease-out;
+  --animate-shimmer: shimmer 2s infinite;
+  --animate-like-heart: likeHeart 0.6s ease-out;
+
+  --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-card-hover: 0 4px 16px rgba(0, 0, 0, 0.12);
+  --shadow-story-ring: 0 0 0 2px #fff, 0 0 0 4px #FF4B6E;
+  --shadow-like-button: 0 4px 12px rgba(255, 75, 110, 0.4);
+}
+
+/* Base styles */
+@layer base {
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    @apply bg-white text-dark-100 font-sans antialiased;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+  }
+
+  /* Hide scrollbar but keep functionality */
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Custom scrollbar for webkit */
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #E5E5E5;
+    border-radius: 9999px;
+  }
+}
+
+@layer components {
+  /* Scale in animation */
+  .animate-scale-in {
+    animation: scaleIn 0.2s ease-out;
+  }
+
+  /* Button variants */
+  .btn-primary {
+    @apply bg-primary-500 text-white font-semibold py-3 px-6 rounded-[20px] transition-all duration-200;
+    @apply hover:bg-primary-600 active:bg-primary-700 active:scale-95;
+    @apply disabled:opacity-50 disabled:cursor-not-allowed disabled:active:scale-100;
+  }
+
+  .btn-secondary {
+    @apply bg-gray-100 text-dark-100 font-semibold py-3 px-6 rounded-[20px] transition-all duration-200;
+    @apply hover:bg-gray-200 active:bg-gray-300 active:scale-95;
+  }
+
+  .btn-outline {
+    @apply border-2 border-primary-500 text-primary-500 font-semibold py-2.5 px-5 rounded-[20px] transition-all duration-200;
+    @apply hover:bg-primary-50 active:bg-primary-100 active:scale-95;
+  }
+
+  /* Card styles */
+  .card {
+    @apply bg-white rounded-xl;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: box-shadow 0.2s;
+  }
+
+  .card:hover {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  }
+
+  /* Avatar ring */
+  .avatar-ring {
+    padding: 2px;
+    background: linear-gradient(to top right, #FF4B6E, #FFB84C, #6C5CE7);
+    border-radius: 9999px;
+  }
+
+  .avatar-ring-story {
+    padding: 2px;
+    background: linear-gradient(to top right, #FFB84C, #FF4B6E, #6C5CE7);
+    border-radius: 9999px;
+  }
+
+  /* Input styles */
+  .input {
+    @apply w-full px-4 py-3 border border-gray-300 rounded-lg;
+    @apply focus:outline-none focus:border-primary-500;
+    transition: all 0.2s;
+  }
+
+  .input::placeholder {
+    @apply text-gray-500;
+  }
+
+  /* Bottom nav */
+  .bottom-nav {
+    @apply fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-50;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  /* Gradient backgrounds */
+  .gradient-primary {
+    background: linear-gradient(to right, #FF4B6E, #6C5CE7);
+  }
+
+  .gradient-heart {
+    background: linear-gradient(to right, #FF4B6E, #FFB84C, #FF4B6E);
+    background-size: 200% 100%;
+    animation: gradient-shift 3s ease infinite;
+  }
+
+  /* Glass effect */
+  .glass {
+    @apply bg-white/80 backdrop-blur-lg;
+  }
+}
+
+@layer utilities {
+  /* Text gradient */
+  .text-gradient {
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    background: linear-gradient(to right, #FF4B6E, #6C5CE7);
+  }
+}
+
+/* Safe area padding for mobile devices */
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.pt-safe {
+  padding-top: env(safe-area-inset-top);
+}
+
+/* Animations */
+@keyframes gradient-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+@keyframes slideUp {
+  0% { transform: translateY(100%); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slideDown {
+  0% { transform: translateY(-100%); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes bounceIn {
+  0% { transform: scale(0); opacity: 0; }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes likeHeart {
+  0% { transform: scale(0); opacity: 0; }
+  30% { transform: scale(1.4); opacity: 1; }
+  50% { transform: scale(0.9); }
+  70% { transform: scale(1.1); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes scaleIn {
+  0% { opacity: 0; transform: scale(0.9); }
+  100% { opacity: 1; transform: scale(1); }
+}

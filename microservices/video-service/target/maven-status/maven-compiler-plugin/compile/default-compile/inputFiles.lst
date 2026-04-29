@@ -1,0 +1,17 @@
+/home/lisca/dev-ai/microservices/video-service/src/main/java/com/heartmatch/video/config/MybatisPlusConfig.java
+/home/lisca/dev-ai/microservices/video-service/src/main/java/com/heartmatch/video/controller/MusicController.java
+/home/lisca/dev-ai/microservices/video-service/src/main/java/com/heartmatch/video/repository/VideoCommentRepository.java
+/home/lisca/dev-ai/microservices/video-service/src/main/java/com/heartmatch/video/dto/VideoResponse.java
+/home/lisca/dev-ai/microservices/video-service/src/main/java/com/heartmatch/video/controller/VideoController.java
+/home/lisca/dev-ai/microservices/video-service/src/main/java/com/heartmatch/video/service/VideoService.java
+/home/lisca/dev-ai/microservices/video-service/src/main/java/com/heartmatch/video/dto/ApiResponse.java
+/home/lisca/dev-ai/microservices/video-service/src/main/java/com/heartmatch/video/repository/VideoRepository.java
+/home/lisca/dev-ai/microservices/video-service/src/main/java/com/heartmatch/video/repository/VideoLikeRepository.java
+/home/lisca/dev-ai/microservices/video-service/src/main/java/com/heartmatch/video/VideoServiceApplication.java
+/home/lisca/dev-ai/microservices/video-service/src/main/java/com/heartmatch/video/entity/VideoLike.java
+/home/lisca/dev-ai/microservices/video-service/src/main/java/com/heartmatch/video/dto/VideoRequest.java
+/home/lisca/dev-ai/microservices/video-service/src/main/java/com/heartmatch/video/config/RedisConfig.java
+/home/lisca/dev-ai/microservices/video-service/src/main/java/com/heartmatch/video/entity/Video.java
+/home/lisca/dev-ai/microservices/video-service/src/main/java/com/heartmatch/video/entity/VideoComment.java
+/home/lisca/dev-ai/microservices/video-service/src/main/java/com/heartmatch/video/dto/MusicResponse.java
+/home/lisca/dev-ai/microservices/video-service/src/main/java/com/heartmatch/video/service/MusicService.java
