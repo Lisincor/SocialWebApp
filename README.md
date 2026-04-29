@@ -1,162 +1,71 @@
 # HeartMatch 心动匹配
 
-A modern social dating application built with a microservices architecture. HeartMatch helps users discover connections, share moments, and find meaningful relationships through intelligent matching algorithms.
+遇见心动，开启你的浪漫之旅。
 
-## Architecture Overview
+## 产品介绍
 
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                        Frontend (React)                         │
-│                     http://localhost:5173                       │
-└─────────────────────────────────┬───────────────────────────────┘
-                                  │
-                                  ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                    API Gateway (Spring Cloud)                   │
-│                     http://localhost:8080                       │
-│                     JWT Authentication                          │
-└────┬──────┬──────┬──────┬──────┬──────┬──────┬────────┬───────┘
-     │      │      │      │      │      │      │        │
-     ▼      ▼      ▼      ▼      ▼      ▼      ▼        ▼
-  User   Content  Match   IM    Video  Live   Pay
- Service Service Service Service Service Service Service
- (8081)  (8082)  (8083)  (8084) (8085) (8086) (8087)
-```
+HeartMatch 是一款专为寻找真诚关系的单身人士设计的社交应用。通过智能匹配算法，让你更高效地发现志趣相投的那个人。
 
-## Tech Stack
+## 主要功能
 
-### Backend
-- **Framework**: Spring Boot 3.2, Spring Cloud Gateway
-- **ORM**: MyBatis-Plus 3.5.5
-- **Authentication**: JWT (JJWT 0.12.3)
-- **Database**: MySQL 8.0 (7 separate databases)
-- **Cache**: Redis 7.x
+### 发现与匹配
+- **滑动匹配** - 左滑跳过，右滑喜欢，上滑超级喜欢
+- **智能推荐** - 根据你的喜好和互动，算法每日推荐最合适的对象
+- **双向喜欢即配对** - 两个人互相喜欢即可开始聊天
 
-### Frontend
-- **Framework**: React 19 + Vite 8
-- **Styling**: Tailwind CSS v4
-- **State Management**: Zustand 5
-- **HTTP Client**: Axios with interceptors
+### 动态分享
+- **图文动态** - 发布生活点滴，展示真实的自己
+- **话题标签** - 参与热门话题，发现同好
+- **互动功能** - 点赞、评论、收藏、分享
 
-## Services
+### 即时通讯
+- **匹配聊天** - 和喜欢的人实时对话
+- **消息历史** - 保留每一份珍贵回忆
 
-| Service | Port | Database | Description |
-|---------|------|----------|-------------|
-| gateway | 8080 | - | API Gateway, routing, JWT auth |
-| user-service | 8081 | heartmatch_user | User registration, login, profiles |
-| content-service | 8082 | heartmatch_content | Posts, feed, comments, topics |
-| match-service | 8083 | heartmatch_match | Swipe matching, recommendations |
-| im-service | 8084 | heartmatch_im | Instant messaging, conversations |
-| video-service | 8085 | heartmatch_video | Short videos/Reels |
-| live-service | 8086 | heartmatch_live | Live streaming |
-| pay-service | 8087 | heartmatch_pay | VIP subscriptions, gifts |
+### 个人主页
+- **资料完善** - 展示照片、个人信息、兴趣爱好
+- **认证体系** - 实名认证、学历认证、职业认证，让你更安心
 
-## Quick Start
+## 如何开始
 
-### Prerequisites
-- Java 21+
-- Node.js 18+
-- Maven 3.8+
-- Docker (for MySQL & Redis)
+### 注册账号
+1. 下载并打开 HeartMatch
+2. 使用手机号注册
+3. 填写验证码完成验证
+4. 设置登录密码或使用验证码登录
 
-### 1. Start Infrastructure
-```bash
-docker-compose up -d
-```
+### 完善资料
+1. 上传清晰的头像照片（至少1张）
+2. 填写基本信息：昵称、性别、生日、城市
+3. 可选完善：职业、学历、身高、体重、兴趣爱好
+4. 进行认证，提升可信度
 
-### 2. Start Backend Services
-```bash
-cd microservices
-mvn spring-boot:run -pl gateway,user-service,content-service,match-service,im-service -DskipTests
-```
+### 开始匹配
+1. 进入"发现"页面浏览推荐用户
+2. 右滑喜欢，左滑跳过
+3. 收到互相喜欢通知，开始聊天
+4. 通过动态了解对方更多
 
-Or start individual services:
-```bash
-mvn spring-boot:run -pl gateway -DskipTests      # API Gateway
-mvn spring-boot:run -pl user-service -DskipTests # User Service
-mvn spring-boot:run -pl content-service -DskipTests # Content Service
-```
+## VIP 会员
 
-### 3. Start Frontend
-```bash
-cd frontend
-npm install
-npm run dev
-```
+升级 VIP 享受更多特权：
+- 无限喜欢次数
+- 查看谁喜欢我
+- 超级喜欢次数翻倍
+- 定位切换（查看其他城市用户）
+- 每日反悔机会
 
-Access the app at http://localhost:5173
+## 隐私与安全
 
-## Key Features
+- 你的位置信息仅用于推荐匹配，不会公开
+- 敏感操作需要验证身份
+- 发现虚假账号可一键举报
+- 黑名单功能，屏蔽不想联系的人
 
-### Authentication
-- Phone + SMS verification code login
-- Account password login
-- JWT tokens (24-hour expiry, stored in Redis)
+## 联系我们
 
-### Feed & Content
-- Photo/video posts with location tagging
-- Topics/hashtags support
-- Like, comment, share, and save functionality
-- Recommendation algorithm:
-  ```
-  Score = (Interaction × 0.4) + (Relationship × 0.3) + (Freshness × 0.2) + (Popularity × 0.1)
-  ```
+如有问题或建议，欢迎通过应用内反馈功能联系我们。
 
-### Matching
-- Swipe right to like, left to skip
-- Super like for special connections
-- Mutual likes create a match
-- Daily recommended matches
+---
 
-### Messaging
-- Real-time chat with matched users
-- Conversation history
-- Message read status
-
-## API Endpoints
-
-All API calls go through the gateway at `/api/v1/`:
-
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/api/v1/auth/login-sms` | POST | SMS login |
-| `/api/v1/auth/login-account` | POST | Password login |
-| `/api/v1/posts/feed` | GET | Get personalized feed |
-| `/api/v1/posts/{id}/like` | POST | Like a post |
-| `/api/v1/posts/{id}/comments` | GET/POST | Get/add comments |
-| `/api/v1/matches/swipe` | POST | Record swipe action |
-| `/api/v1/conversations` | GET | Get conversations |
-
-## Project Structure
-
-```
-├── microservices/
-│   ├── gateway/           # API Gateway
-│   ├── user-service/      # User management
-│   ├── content-service/   # Feed & posts
-│   ├── match-service/     # Matching logic
-│   ├── im-service/        # Messaging
-│   ├── video-service/     # Video content
-│   ├── live-service/      # Live streaming
-│   └── pay-service/       # Payments
-├── frontend/
-│   ├── src/
-│   │   ├── pages/         # Route pages
-│   │   ├── components/     # Reusable components
-│   │   ├── stores/         # Zustand stores
-│   │   ├── services/       # API clients
-│   │   └── hooks/          # Custom hooks
-│   └── public/
-├── docker-compose.yml      # MySQL + Redis
-└── docs/                   # Technical docs
-```
-
-## Documentation
-
-- [Technical Specification](./docs/heart-match-tech-spec.md) - Detailed architecture and API docs
-- [Development Guide](./docs/DEVELOPMENT.md) - Development notes and bug fixes
-- [Startup Guide](./docs/启动指南.md) - Step-by-step setup instructions
-
-## License
-
-MIT License
+*用心遇见，勇敢表达。HeartMatch 祝你找到幸福。*
